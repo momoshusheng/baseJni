@@ -69,3 +69,24 @@ Java_com_example_gyf_GyfJniTest_getStaticMethodFromC(JNIEnv *env, jobject instan
     jstring jstr = (*env)->CallStaticObjectMethod(env, clz, mid);
     return jstr;
 }
+
+JNIEXPORT jlong JNICALL
+Java_com_example_gyf_GyfJniTest_accessConstructor(JNIEnv *env, jobject instance) {
+
+    jclass clz_date = (*env)->FindClass(env, "java/util/Date");
+    //构造方法的函数名的格式是：<init>
+    //不能写类名，因为构造方法函数名都一样区分不了，只能通过参数列表（签名）区分
+    jmethodID mid_Date = (*env)->GetMethodID(env, clz_date, "<init>", "()V");;
+
+    //调用构造函数
+    jobject date = (*env)->NewObject(env, clz_date, mid_Date);
+
+    //注意签名，返回值long的属性签名是J
+    jmethodID mid_getTime= (*env)->GetMethodID(env, clz_date, "getTime", "()J");
+    //调用getTime方法
+    jlong jtime = (*env)->CallLongMethod(env, date, mid_getTime);
+
+    return jtime;
+
+
+}

@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     +"访问静态成员:"+GyfJniTest.NUM+"\n"
                 +"访问非静态方法:"+gyfJniTest.getMethodFromC()+"\n"
                 +"访问静态方法:"+gyfJniTest.getStaticMethodFromC()+"\n"
+                +"访问构造方法方法:"+gyfJniTest.accessConstructor()+"\n"
         );
     }
 
